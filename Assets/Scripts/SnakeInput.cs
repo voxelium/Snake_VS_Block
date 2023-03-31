@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class SnakeInput : MonoBehaviour
 {
-    private Camera camera;
+    private Camera _camera;
 
     private void Start()
     {
-        camera = Camera.main;
+        _camera = Camera.main;
     }
 
     public Vector2 GetDirectionFromClick(Vector2 headPosition)
@@ -23,9 +23,9 @@ public class SnakeInput : MonoBehaviour
 
         //Это вариант кода для клика только в верхней части экрана.
         //В данном случае при каждом клике Y всегда равен 1 (максимум в режиме ScreenToViewportPoint)
-        mousePosition = camera.ScreenToViewportPoint(mousePosition);
+        mousePosition = _camera.ScreenToViewportPoint(mousePosition);
         mousePosition.y = 1;
-        mousePosition = camera.ViewportToWorldPoint(mousePosition);
+        mousePosition = _camera.ViewportToWorldPoint(mousePosition);
 
 
         Vector2 direction = new Vector2(mousePosition.x - headPosition.x, mousePosition.y - headPosition.y);
