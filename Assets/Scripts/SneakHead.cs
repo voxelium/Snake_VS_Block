@@ -14,11 +14,7 @@ public class SneakHead : MonoBehaviour
         rigidBody2D = GetComponent<Rigidbody2D>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+
 
     public void Move(Vector3 newPosition)
     {

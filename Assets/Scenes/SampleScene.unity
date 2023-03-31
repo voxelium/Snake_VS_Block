@@ -133,6 +133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 145124499}
   - component: {fileID: 145124501}
+  - component: {fileID: 145124502}
   - component: {fileID: 145124500}
   m_Layer: 0
   m_Name: Sneak
@@ -149,7 +150,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 145124498}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -4.56, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -169,6 +170,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e64d935c7b774700a19d3c97be7b9f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  head: {fileID: 1246530164}
+  speed: 3
+  tailSpringiness: 0.2
 --- !u!114 &145124501
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -183,6 +187,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   snakeSize: 5
   segment: {fileID: 6485706265947086119, guid: bc1c94d372c5942beb1d31c157857f5e, type: 3}
+--- !u!114 &145124502
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 145124498}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dab61ea1706004cb080ed551ad921dd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -259,8 +275,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: -1.06, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
