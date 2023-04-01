@@ -15,9 +15,20 @@ public class SneakHead : MonoBehaviour
     }
 
 
-
     public void Move(Vector3 newPosition)
     {
         rigidBody2D.MovePosition(newPosition);
     }
+
+
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        if (collision.gameObject.TryGetComponent(out Block block))
+        {
+            block.Fill();
+        }
+    }
+
+  
+
 }
