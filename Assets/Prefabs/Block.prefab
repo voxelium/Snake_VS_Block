@@ -127,7 +127,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f085a2f815ff4ecfac4ef9ec58a9a22, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyPriceRange: {x: 10, y: 20}
+  destroyPriceRange: {x: 1, y: 8}
 --- !u!114 &7419560777244345064
 MonoBehaviour:
   m_ObjectHideFlags: 0
