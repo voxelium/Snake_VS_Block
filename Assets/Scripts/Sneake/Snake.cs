@@ -8,7 +8,7 @@ using UnityEngine.Events;
 
 public class Snake : MonoBehaviour
 {
-    [SerializeField] private SnakeHead head;
+    [SerializeField] private SnakeHead snakeHead;
     [SerializeField] private float speed;
     [SerializeField] private float tailSpringiness;
 
@@ -30,18 +30,29 @@ public class Snake : MonoBehaviour
         SizeUpdate?.Invoke(tail.Count);
     }
 
+    private void OnEnable()
+    {
+        snakeHead.BlockCollided += OnBlockCollided;
+    }
+
+    private void OnDisable()
+    {
+        snakeHead.BlockCollided -= OnBlockCollided;
+    }
+
+
 
     private void FixedUpdate()
     {
-        Move(head.transform.position + head.transform.up * speed * Time.fixedDeltaTime);
+        Move(snakeHead.transform.position + snakeHead.transform.up * speed * Time.fixedDeltaTime);
 
-        head.transform.up = snakeInput.GetDirectionFromClick(head.transform.position);
+        snakeHead.transform.up = snakeInput.GetDirectionFromClick(snakeHead.transform.position);
     }
 
 
     private void Move(Vector3 nextPosition)
     {
-        Vector3 targetPosition = head.transform.position;
+        Vector3 targetPosition = snakeHead.transform.position;
 
         foreach (var segment in tail)
         {
@@ -50,7 +61,17 @@ public class Snake : MonoBehaviour
             targetPosition = currentPosition;
         }
 
-        head.Move(nextPosition);
+        snakeHead.Move(nextPosition);
+    }
+
+
+    private void OnBlockCollided()
+    {
+        Segment deletedSegment = tail[tail.Count - 1];
+        tail.Remove(deletedSegment);
+        Destroy(deletedSegment.gameObject);
+
+        SizeUpdate?.Invoke(tail.Count);
     }
 
 }

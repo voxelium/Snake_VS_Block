@@ -382,8 +382,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7011555217579986428}
-  - component: {fileID: 7011555217579986426}
   - component: {fileID: 7011555217579986425}
+  - component: {fileID: 7011555217579986426}
   - component: {fileID: 7011555217579986427}
   - component: {fileID: 3074895554764716925}
   m_Layer: 0
@@ -409,20 +409,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7011555217579986426
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7011555217579986429}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 025f8d6473dda4a6bb2b6388ba0aee2b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  snakeSize: 5
-  segment: {fileID: 6485706265947086119, guid: bc1c94d372c5942beb1d31c157857f5e, type: 3}
 --- !u!114 &7011555217579986425
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -435,6 +421,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dab61ea1706004cb080ed551ad921dd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &7011555217579986426
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7011555217579986429}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 025f8d6473dda4a6bb2b6388ba0aee2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  snakeSize: 50
+  segment: {fileID: 6485706265947086119, guid: bc1c94d372c5942beb1d31c157857f5e, type: 3}
 --- !u!114 &7011555217579986427
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -447,7 +447,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e64d935c7b774700a19d3c97be7b9f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  head: {fileID: 7011555216458689307}
+  snakeHead: {fileID: 7011555216458689307}
   speed: 3
   tailSpringiness: 0.13
 --- !u!114 &3074895554764716925
