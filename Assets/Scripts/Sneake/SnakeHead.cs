@@ -4,7 +4,7 @@ using UnityEngine;
 
 [RequireComponent(typeof (Rigidbody2D))]
 
-public class SneakHead : MonoBehaviour
+public class SnakeHead : MonoBehaviour
 {
     private Rigidbody2D rigidBody2D;
 

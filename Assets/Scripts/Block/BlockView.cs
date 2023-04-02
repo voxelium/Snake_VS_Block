@@ -9,7 +9,7 @@ using UnityEngine;
 public class BlockView : MonoBehaviour
 {
 
-    [SerializeField] TMP_Text txtDamage;
+    [SerializeField] TMP_Text txtHealth;
 
     private Block block;
 
@@ -23,19 +23,19 @@ public class BlockView : MonoBehaviour
 
     private void OnEnable()
     {
-        block.DamageUpdate += TxtDamageUpdate;
+        block.DamageUpdate += TxtHealthUpdate;
     }
 
 
     private void OnDisable()
     {
-        block.DamageUpdate -= TxtDamageUpdate;
+        block.DamageUpdate -= TxtHealthUpdate;
     }
 
 
-    private void TxtDamageUpdate(int damageCount)
+    private void TxtHealthUpdate(int damageCount)
     {
-        txtDamage.text = damageCount.ToString();
+        txtHealth.text = damageCount.ToString();
     }
 
 

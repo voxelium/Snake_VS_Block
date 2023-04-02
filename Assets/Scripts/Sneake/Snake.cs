@@ -1,15 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(TailGenerator))]
 [RequireComponent(typeof(SnakeInput))]
 
-public class Sneak : MonoBehaviour
+public class Snake : MonoBehaviour
 {
-    [SerializeField] private SneakHead head;
+    [SerializeField] private SnakeHead head;
     [SerializeField] private float speed;
     [SerializeField] private float tailSpringiness;
+
+    public event UnityAction<int> SizeUpdate;
 
     private SnakeInput snakeInput;
     private List<Segment> tail;
@@ -23,6 +26,8 @@ public class Sneak : MonoBehaviour
         tailGenerator = GetComponent<TailGenerator>();
 
         tail = tailGenerator.Generate();
+
+        SizeUpdate?.Invoke(tail.Count);
     }
 
 
