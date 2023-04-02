@@ -9,6 +9,7 @@ using UnityEngine.Events;
 public class Snake : MonoBehaviour
 {
     [SerializeField] private SnakeHead snakeHead;
+    [SerializeField] private int tailSize;
     [SerializeField] private float speed;
     [SerializeField] private float tailSpringiness;
 
@@ -25,7 +26,7 @@ public class Snake : MonoBehaviour
 
         tailGenerator = GetComponent<TailGenerator>();
 
-        tail = tailGenerator.Generate();
+        tail = tailGenerator.Generate(tailSize);
 
         SizeUpdate?.Invoke(tail.Count);
     }
@@ -33,11 +34,13 @@ public class Snake : MonoBehaviour
     private void OnEnable()
     {
         snakeHead.BlockCollided += OnBlockCollided;
+        snakeHead.BonusCollected += OnBonusCollected;
     }
 
     private void OnDisable()
     {
         snakeHead.BlockCollided -= OnBlockCollided;
+        snakeHead.BonusCollected -= OnBonusCollected;
     }
 
 
@@ -71,6 +74,12 @@ public class Snake : MonoBehaviour
         tail.Remove(deletedSegment);
         Destroy(deletedSegment.gameObject);
 
+        SizeUpdate?.Invoke(tail.Count);
+    }
+
+    private void OnBonusCollected(int bonusSize)
+    {
+        tail.AddRange(tailGenerator.Generate(bonusSize));
         SizeUpdate?.Invoke(tail.Count);
     }
 

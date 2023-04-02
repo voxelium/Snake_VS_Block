@@ -10,6 +10,7 @@ public class SnakeHead : MonoBehaviour
     private Rigidbody2D rigidBody2D;
 
     public event UnityAction BlockCollided;
+    public event UnityAction<int> BonusCollected;
 
     // Start is called before the first frame update
     private void Start()
@@ -33,6 +34,14 @@ public class SnakeHead : MonoBehaviour
         }
     }
 
-  
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.TryGetComponent(out Bonus bonus))
+        {
+            BonusCollected?.Invoke(bonus.Collect());
+        }
+    }
+
 
 }

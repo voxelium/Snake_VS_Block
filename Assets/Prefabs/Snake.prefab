@@ -433,7 +433,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 025f8d6473dda4a6bb2b6388ba0aee2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  snakeSize: 50
   segment: {fileID: 6485706265947086119, guid: bc1c94d372c5942beb1d31c157857f5e, type: 3}
 --- !u!114 &7011555217579986427
 MonoBehaviour:
@@ -448,6 +447,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   snakeHead: {fileID: 7011555216458689307}
+  tailSize: 50
   speed: 3
   tailSpringiness: 0.13
 --- !u!114 &3074895554764716925
