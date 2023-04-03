@@ -4,13 +4,18 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
+    [Header("General")]
     [SerializeField] private Transform container;
     [SerializeField] private int linesAmount;
     [SerializeField] private int distanceBetweenFullLine;
     [SerializeField] private int distanceBetweenRandomLine;
-
+    [Header("Blocks")]
     [SerializeField] private Block blockTemplate;
     [SerializeField] private int blockSpawnChance;
+    [Header("Wall")]
+    [SerializeField] private Wall wallTemplate;
+    [SerializeField] private int wallSpawnChance;
+
 
     private SpawnPoint[] blockSpawnPoints;
 
@@ -24,10 +29,7 @@ public class Spawner : MonoBehaviour
             GenerateFullLine(blockSpawnPoints, blockTemplate.gameObject);
             MoveSpawner(distanceBetweenRandomLine);
             GenerateRandomElements(blockSpawnPoints, blockTemplate.gameObject, blockSpawnChance);
-
-
         }
-
     }
 
 
@@ -67,5 +69,6 @@ public class Spawner : MonoBehaviour
     {
         transform.position = new Vector3(transform.position.x, transform.position.y + distanceY, transform.position.z);
     }
+
 
 }
