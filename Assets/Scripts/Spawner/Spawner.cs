@@ -20,27 +20,25 @@ public class Spawner : MonoBehaviour
 
         for (int i = 0; i < linesAmount; i++)
         {
-            GenerateFullLine(blockSpawnPoints, blockTemplate.gameObject);
             MoveSpawner(distanceBetweenFullLine);
+            GenerateFullLine(blockSpawnPoints, blockTemplate.gameObject);
+            MoveSpawner(distanceBetweenRandomLine);
+            GenerateRandomElements(blockSpawnPoints, blockTemplate.gameObject, blockSpawnChance);
+
+
         }
 
     }
 
 
-  
-    private void GenerateRandomElements()
-    {
-
-
-    }
-
-
+ 
     private GameObject GenerateOneElement(Vector3 spawnPoint, GameObject generatedElement)
     {
         spawnPoint.y = spawnPoint.y - generatedElement.transform.localScale.y;
 
         return (Instantiate(generatedElement, spawnPoint, Quaternion.identity, container));
     }
+
 
 
     private void GenerateFullLine(SpawnPoint[] spawnPoints, GameObject generatedElement)
@@ -51,6 +49,19 @@ public class Spawner : MonoBehaviour
         }
 
     }
+
+
+    private void GenerateRandomElements(SpawnPoint[] spawnPoints, GameObject generatedElement, int spawnChance)
+    {
+        for (int i = 0; i < spawnPoints.Length; i++)
+        {
+            if (Random.Range(0, 100) < spawnChance)
+            {
+                GameObject element = GenerateOneElement(spawnPoints[i].transform.position, generatedElement);
+            }
+        }
+    }
+
 
     private void MoveSpawner(int distanceY)
     {
