@@ -35,12 +35,14 @@ public class Snake : MonoBehaviour
     {
         snakeHead.BlockCollided += OnBlockCollided;
         snakeHead.BonusCollected += OnBonusCollected;
+        snakeHead.FinishGame += OnFinishGame;
     }
 
     private void OnDisable()
     {
         snakeHead.BlockCollided -= OnBlockCollided;
         snakeHead.BonusCollected -= OnBonusCollected;
+        snakeHead.FinishGame -= OnFinishGame;
     }
 
 
@@ -82,5 +84,18 @@ public class Snake : MonoBehaviour
         tail.AddRange(tailGenerator.Generate(bonusSize));
         SizeUpdate?.Invoke(tail.Count);
     }
+
+
+    private void OnFinishGame()
+    {
+        foreach (var segment in tail)
+        {
+            Destroy(gameObject);
+            SizeUpdate?.Invoke(tail.Count);
+        }
+    }
+
+
+
 
 }

@@ -11,6 +11,7 @@ public class SnakeHead : MonoBehaviour
 
     public event UnityAction BlockCollided;
     public event UnityAction<int> BonusCollected;
+    public event UnityAction FinishGame;
 
     // Start is called before the first frame update
     private void Start()
@@ -41,7 +42,20 @@ public class SnakeHead : MonoBehaviour
         {
             BonusCollected?.Invoke(bonus.Collect());
         }
+
+
+        else if (collision.gameObject.TryGetComponent(out FinishLine finishLine))
+        {
+            rigidBody2D.simulated = false;
+            FinishGame?.Invoke();
+
+        }
+
+        
+
     }
+
+ 
 
 
 }

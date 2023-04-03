@@ -11,7 +11,10 @@ public class SnakeTracker : MonoBehaviour
 
     private void FixedUpdate()
     {
-        transform.position = Vector3.Lerp(transform.position, GetTargetPosition(), speed * Time.fixedDeltaTime);
+        if (snakeHead)
+        {
+            transform.position = Vector3.Lerp(transform.position, GetTargetPosition(), speed * Time.fixedDeltaTime);
+        }
     }
 
     private Vector3 GetTargetPosition()

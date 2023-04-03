@@ -13,9 +13,10 @@ public class Spawner : MonoBehaviour
     [SerializeField] private Block blockTemplate;
     [SerializeField] private int blockSpawnChance;
     [Header("Wall")]
-    [SerializeField] private Wall wallTemplate;
-    [SerializeField] private int wallSpawnChance;
-
+    [SerializeField] private Wall wallTemplateLeft;
+    [SerializeField] private Wall wallTemplateRight;
+    [Header("Finish Line")]
+    [SerializeField] private FinishLine finishLine;
 
     private SpawnPoint[] blockSpawnPoints;
 
@@ -29,16 +30,44 @@ public class Spawner : MonoBehaviour
             GenerateFullLine(blockSpawnPoints, blockTemplate.gameObject);
             MoveSpawner(distanceBetweenRandomLine);
             GenerateRandomElements(blockSpawnPoints, blockTemplate.gameObject, blockSpawnChance);
+            
         }
+
+
+        //Спавн боковых стенок
+        Vector3 wallSpawnPositionLeft = wallTemplateLeft.transform.position;
+        Vector3 wallSpawnPositionRight = wallTemplateRight.transform.position;
+
+        int wallCount = 9 + linesAmount + distanceBetweenFullLine * linesAmount + distanceBetweenRandomLine * linesAmount;
+
+        for (int i = 0; i < wallCount; i++)
+        {
+            Instantiate(wallTemplateLeft.gameObject, wallSpawnPositionLeft, Quaternion.identity);
+            Instantiate(wallTemplateRight.gameObject, wallSpawnPositionRight, Quaternion.identity);
+
+            wallSpawnPositionLeft = newSpawnPosition(wallSpawnPositionLeft);
+            wallSpawnPositionRight = newSpawnPosition(wallSpawnPositionRight);
+        }
+
+        Vector3 finishLinePosition = new Vector3 (0, wallSpawnPositionLeft.y, 0);
+
+        Instantiate(finishLine.gameObject, finishLinePosition, Quaternion.identity);
+
     }
 
+    // увелничивает значение Y для спавна следущей боковой станки
+    private Vector3 newSpawnPosition(Vector3 currentPosition)
+    {
+       Vector3 targetPosition = new Vector3 (currentPosition.x, currentPosition.y + wallTemplateLeft.transform.localScale.y, currentPosition.z);
+       return targetPosition;
+    }
 
  
-    private GameObject GenerateOneElement(Vector3 spawnPoint, GameObject generatedElement)
+    private GameObject GenerateOneElement(Vector3 BlockSpawnPoint, GameObject generatedElement)
     {
-        spawnPoint.y = spawnPoint.y - generatedElement.transform.localScale.y;
+        BlockSpawnPoint.y = BlockSpawnPoint.y - generatedElement.transform.localScale.y;
 
-        return (Instantiate(generatedElement, spawnPoint, Quaternion.identity, container));
+        return (Instantiate(generatedElement, BlockSpawnPoint, Quaternion.identity, container));
     }
 
 
@@ -69,6 +98,7 @@ public class Spawner : MonoBehaviour
     {
         transform.position = new Vector3(transform.position.x, transform.position.y + distanceY, transform.position.z);
     }
+
 
 
 }
