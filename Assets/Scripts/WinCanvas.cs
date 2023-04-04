@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class VolumeWin : MonoBehaviour
+public class WinCanvas : MonoBehaviour
 {
     [SerializeField] TMP_Text volumeWin;
 
