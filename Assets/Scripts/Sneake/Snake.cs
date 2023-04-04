@@ -14,6 +14,8 @@ public class Snake : MonoBehaviour
     [SerializeField] private float tailSpringiness;
 
     public event UnityAction<int> SizeUpdate;
+    public event UnityAction<int> WinVolume;
+ 
 
     private SnakeInput snakeInput;
     private List<Segment> tail;
@@ -72,10 +74,11 @@ public class Snake : MonoBehaviour
 
     private void OnBlockCollided()
     {
-        Segment deletedSegment = tail[tail.Count - 1];
-        tail.Remove(deletedSegment);
-        Destroy(deletedSegment.gameObject);
+        //Segment deletedSegment = tail[tail.Count - 1];
+        //tail.Remove(deletedSegment);
+        //Destroy(deletedSegment.gameObject);
 
+        DeleteSegment();
         SizeUpdate?.Invoke(tail.Count);
     }
 
@@ -88,13 +91,24 @@ public class Snake : MonoBehaviour
 
     private void OnFinishGame()
     {
-        foreach (var segment in tail)
+        WinVolume?.Invoke(tail.Count);
+
+        int finishTailSize = tail.Count;
+
+        for (int i = 0; i < finishTailSize; i++)
         {
-            Destroy(gameObject);
+            DeleteSegment();
             SizeUpdate?.Invoke(tail.Count);
         }
+   
     }
 
+    private void DeleteSegment()
+    {
+        Segment deletedSegment = tail[tail.Count - 1];
+        tail.Remove(deletedSegment);
+        Destroy(deletedSegment.gameObject);
+    }
 
 
 

@@ -8,14 +8,17 @@ using UnityEngine.Events;
 public class SnakeHead : MonoBehaviour
 {
     private Rigidbody2D rigidBody2D;
+    private Snake snake;
 
     public event UnityAction BlockCollided;
     public event UnityAction<int> BonusCollected;
     public event UnityAction FinishGame;
 
+
     // Start is called before the first frame update
     private void Start()
     {
+        snake = GetComponentInParent<Snake>();
         rigidBody2D = GetComponent<Rigidbody2D>();
     }
 
@@ -48,10 +51,7 @@ public class SnakeHead : MonoBehaviour
         {
             rigidBody2D.simulated = false;
             FinishGame?.Invoke();
-
         }
-
-        
 
     }
 
