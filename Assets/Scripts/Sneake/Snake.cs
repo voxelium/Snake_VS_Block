@@ -14,7 +14,8 @@ public class Snake : MonoBehaviour
     [SerializeField] private float tailSpringiness;
 
     public event UnityAction<int> SizeUpdate;
-    public event UnityAction<int> WinVolume;
+    public event UnityAction<int> ShowWinCanvas;
+    public event UnityAction ShowGameOverCanvas;
  
 
     private SnakeInput snakeInput;
@@ -91,7 +92,7 @@ public class Snake : MonoBehaviour
 
     private void OnFinishGame()
     {
-        WinVolume?.Invoke(tail.Count);
+        ShowWinCanvas?.Invoke(tail.Count);
 
         int finishTailSize = tail.Count;
 
