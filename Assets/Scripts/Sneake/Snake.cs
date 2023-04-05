@@ -75,12 +75,17 @@ public class Snake : MonoBehaviour
 
     private void OnBlockCollided()
     {
-        //Segment deletedSegment = tail[tail.Count - 1];
-        //tail.Remove(deletedSegment);
-        //Destroy(deletedSegment.gameObject);
-
         DeleteSegment();
         SizeUpdate?.Invoke(tail.Count);
+
+        if (tail.Count <= 0)
+        {
+            snakeHead.GetComponent<Rigidbody2D>().simulated = false;
+
+            // Хорошо бы сюда добавить таймер
+
+            ShowGameOverCanvas?.Invoke();
+        }
     }
 
     private void OnBonusCollected(int bonusSize)
@@ -94,15 +99,10 @@ public class Snake : MonoBehaviour
     {
         ShowWinCanvas?.Invoke(tail.Count);
 
-        int finishTailSize = tail.Count;
+        DeleteAllSegments();
 
-        for (int i = 0; i < finishTailSize; i++)
-        {
-            DeleteSegment();
-            SizeUpdate?.Invoke(tail.Count);
-        }
-   
     }
+
 
     private void DeleteSegment()
     {
@@ -111,6 +111,17 @@ public class Snake : MonoBehaviour
         Destroy(deletedSegment.gameObject);
     }
 
+
+    private void DeleteAllSegments()
+    {
+        int finishTailSize = tail.Count;
+
+        for (int i = 0; i < finishTailSize; i++)
+        {
+            DeleteSegment();
+            SizeUpdate?.Invoke(tail.Count);
+        }
+    }
 
 
 }

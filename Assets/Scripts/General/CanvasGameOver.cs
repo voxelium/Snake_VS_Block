@@ -21,7 +21,7 @@ public class CanvasGameOver : MonoBehaviour
         _snake.ShowGameOverCanvas += ShowCanvas;
     }
 
-    private void Ondisable()
+    private void OnDisable()
     {
         _snake.ShowGameOverCanvas -= ShowCanvas;
     }
