@@ -6,12 +6,20 @@ public class Spawner : MonoBehaviour
 {
     [Header("General")]
     [SerializeField] private Transform container;
-    [SerializeField] private int linesAmount;
-    [SerializeField] private int distanceBetweenFullLine;
-    [SerializeField] private int distanceBetweenRandomLine;
-    [Header("Blocks")]
-    [SerializeField] private Block blockTemplate;
-    [SerializeField] private int blockSpawnChance;
+    [SerializeField] private int _LinesAmount;
+
+    [Header("Damage Blocks")]
+    [SerializeField] private Block _blockTemplate;
+    [SerializeField] private int _blockSpawnChance;
+
+    [SerializeField] private int _distanceBetweenFullLines;
+    [SerializeField] private int _distanceBetweenRandomLines;
+
+    [Header("Bonus Blocks")]
+    [SerializeField] private Bonus _bonusTemplate;
+    [SerializeField] private int _distanceBetweenBonusLines;
+    [SerializeField] private int _bonusSpawnChance;
+
     [Header("Wall")]
     [SerializeField] private Wall wallTemplateLeft;
     [SerializeField] private Wall wallTemplateRight;
@@ -24,13 +32,14 @@ public class Spawner : MonoBehaviour
     {
         blockSpawnPoints = GetComponentsInChildren<SpawnPoint>();
 
-        for (int i = 0; i < linesAmount; i++)
+        for (int i = 0; i < _LinesAmount; i++)
         {
-            MoveSpawner(distanceBetweenFullLine);
-            GenerateFullLine(blockSpawnPoints, blockTemplate.gameObject);
-            MoveSpawner(distanceBetweenRandomLine);
-            GenerateRandomElements(blockSpawnPoints, blockTemplate.gameObject, blockSpawnChance);
-            
+            MoveSpawner(_distanceBetweenFullLines);
+            GenerateFullLine(blockSpawnPoints, _blockTemplate.gameObject);
+            MoveSpawner(_distanceBetweenRandomLines);
+            GenerateRandomElements(blockSpawnPoints, _blockTemplate.gameObject, _blockSpawnChance);
+            MoveSpawner(_distanceBetweenBonusLines);
+            GenerateRandomElements(blockSpawnPoints, _bonusTemplate.gameObject, _bonusSpawnChance);
         }
 
 
@@ -38,7 +47,7 @@ public class Spawner : MonoBehaviour
         Vector3 wallSpawnPositionLeft = wallTemplateLeft.transform.position;
         Vector3 wallSpawnPositionRight = wallTemplateRight.transform.position;
 
-        int wallCount = 9 + linesAmount + distanceBetweenFullLine * linesAmount + distanceBetweenRandomLine * linesAmount;
+        int wallCount = 9 + _LinesAmount + (_distanceBetweenFullLines + _distanceBetweenRandomLines + _distanceBetweenBonusLines) * _LinesAmount;
 
         for (int i = 0; i < wallCount; i++)
         {
@@ -49,13 +58,13 @@ public class Spawner : MonoBehaviour
             wallSpawnPositionRight = newSpawnPosition(wallSpawnPositionRight);
         }
 
+        //Spawn finish line
         Vector3 finishLinePosition = new Vector3 (0, wallSpawnPositionLeft.y, 0);
-
         Instantiate(finishLine.gameObject, finishLinePosition, Quaternion.identity);
 
     }
 
-    // увелничивает значение Y для спавна следущей боковой станки
+    // increase value Y for wall spawn
     private Vector3 newSpawnPosition(Vector3 currentPosition)
     {
        Vector3 targetPosition = new Vector3 (currentPosition.x, currentPosition.y + wallTemplateLeft.transform.localScale.y, currentPosition.z);
@@ -92,6 +101,7 @@ public class Spawner : MonoBehaviour
             }
         }
     }
+
 
 
     private void MoveSpawner(int distanceY)

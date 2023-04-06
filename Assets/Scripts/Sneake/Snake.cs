@@ -28,9 +28,11 @@ public class Snake : MonoBehaviour
         snakeInput = GetComponent<SnakeInput>();
 
         tailGenerator = GetComponent<TailGenerator>();
-
         tail = tailGenerator.Generate(tailSize);
+    }
 
+    private void Start()
+    {
         SizeUpdate?.Invoke(tail.Count);
     }
 
